@@ -18,8 +18,25 @@ Route::get('/', function () {
     echo 'worked!';
 });
 
+Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 
+# Authentication routes...
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('me', 'AuthController@me');
+    Route::post('logout', 'AuthController@logout');
+
+    # Admin routes...
+    Route::group(['middleware' => ['apiAdmin'], 'prefix' => 'admin' ], function () {
+        Route::get('auth-check', function () {
+            return response()->json([
+                'status' => true,
+                'message' => "You already logged in.",
+            ]);
+        });
+
+    });
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

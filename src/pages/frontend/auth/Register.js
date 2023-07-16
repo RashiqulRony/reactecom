@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import Navbar from "../../../layouts/frontend/Navbar";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import http from "../../../http";
 import Swal from 'sweetalert2'
 
 
 function Register() {
+    const history = useHistory();
+
     const [registerInput, setRegister] = useState({
         'name' : '',
         'email' : '',
@@ -32,14 +34,17 @@ function Register() {
 
         http.post('/register', data).then((response) => response.data)
             .then((response) => {
-                console.log(response)
-
                 if (response.status === true) {
-
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    history.push('/login')
                 } else {
-
                     setRegister({...registerInput, errors: response.errors})
-
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',

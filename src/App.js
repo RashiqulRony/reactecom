@@ -1,6 +1,6 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Master from "./layouts/admin/Master";
+import AdminRoute from './AdminRoute';
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Home from "./pages/frontend/Home";
 import Login from "./pages/frontend/auth/Login";
 import Register from "./pages/frontend/auth/Register";
@@ -12,9 +12,16 @@ function App() {
           <Router>
               <Switch>
                   <Route path="/" exact component={Home} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/register" component={Register} />
-                  <Route path="/admin" name="Admin" render={(props) => <Master {...props} /> } />
+                  <Route path="/login">
+                      { localStorage.getItem('__AUTH_TOKEN') ? <Redirect to="/" /> : <Login /> }
+                  </Route>
+                  <Route path="/register">
+                      { localStorage.getItem('__AUTH_TOKEN') ? <Redirect to="/" /> : <Register /> }
+                  </Route>
+
+                  {/*<Route path="/admin" name="Admin" render={(props) => <Master {...props} /> } />*/}
+
+                  <AdminRoute path="/admin" name="Admin" />
               </Switch>
           </Router>
       </div>
