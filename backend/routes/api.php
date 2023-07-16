@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     # Admin routes...
     Route::group(['middleware' => ['apiAdmin'], 'prefix' => 'admin' ], function () {
+
+        Route::apiResource('category', 'CategoryController');
+
         Route::get('auth-check', function () {
             return response()->json([
                 'status' => true,

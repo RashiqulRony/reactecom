@@ -1,8 +1,49 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import logo from "../../assets/logo.png";
+import http from "../../http";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+
+    const history = useHistory();
+
+    const logout = (e) => {
+        e.preventDefault()
+        http.post('/logout', {}).then((response) => response.data)
+            .then((response) => {
+                localStorage.removeItem('__AUTH_TOKEN')
+                localStorage.removeItem('__AUTH_USER')
+                if (response.status === true) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    history.push('/')
+                    setTimeout(function () {
+                        // eslint-disable-next-line no-restricted-globals
+                        location.reload()
+                    }, 1500)
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Something went wrong. Please Login',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+
+            }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    let user = JSON.parse(localStorage.getItem('__AUTH_USER'))
+
     const mobileNav = () => {
         document.body.classList.toggle('sb-sidenav-toggled');
     }
@@ -18,14 +59,13 @@ const Navbar = () => {
 
             <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li className="nav-item dropdown">
-                    <Link className="nav-link dropdown-toggle" id="navbarDropdown" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-user fa-fw"></i></Link>
+                    <Link className="nav-link dropdown-toggle" id="navbarDropdown" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-user fa-fw"></i> {user.name}</Link>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><Link className="dropdown-item" to="#!">Settings</Link></li>
-                        <li><Link className="dropdown-item" to="#!">Activity Log</Link></li>
+                        <li><Link className="dropdown-item" to="#!">Profile</Link></li>
                         <li>
                             <hr className="dropdown-divider"/>
                         </li>
-                        <li><Link className="dropdown-item" to="#!">Logout</Link></li>
+                        <li><button type="button" className="dropdown-item" onClick={logout} >Logout</button></li>
                     </ul>
                 </li>
             </ul>
