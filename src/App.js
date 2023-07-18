@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import Home from "./pages/frontend/Home";
 import Login from "./pages/frontend/auth/Login";
 import Register from "./pages/frontend/auth/Register";
+import './custom.scss'
 
 
 function App() {

@@ -11,7 +11,7 @@ import routes from "../../routes/routes";
 
 const Master = () => {
     return (
-        <div className="sb-nav-fixed">
+        <div className="sb-nav-fixed __Admin">
             <Navbar />
 
             <div id="layoutSidenav">

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import http from "../../http";
+import http from "../../../http";
 import Swal from "sweetalert2";
 
 function CategoryCreate () {
@@ -36,7 +36,6 @@ function CategoryCreate () {
 
         http.post('/admin/category', data).then((response) => response.data)
             .then((response) => {
-                console.log(response)
                 if (response.status === true) {
                     Swal.fire({
                         position: 'top-end',

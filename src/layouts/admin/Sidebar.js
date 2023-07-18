@@ -19,6 +19,11 @@ const Sidebar = () => {
                            Category
                        </Link>
 
+                       <Link className="nav-link" to="/admin/subcategory">
+                           <div className="sb-nav-link-icon"><i className="fa fa-cube"></i></div>
+                           Subcategory
+                       </Link>
+
                        <Link className="nav-link" to="/admin/product">
                            <div className="sb-nav-link-icon"><i className="fa fa-shopping-cart"></i></div>
                            Product

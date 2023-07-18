@@ -36,7 +36,9 @@ function AdminRoute({...rest}) {
 
     if (Loading) {
         return (
-            <p>Loading....</p>
+            <div className="pageLoading">
+                <h5>Loading...</h5>
+            </div>
         );
     }
 

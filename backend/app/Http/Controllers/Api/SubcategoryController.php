@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class SubcategoryController extends Controller
 {
-
     public function index()
     {
         try {
-            $data = Category::orderBy('created_at', 'DESC')->get();
+            $data = Subcategory::join('categories', 'subcategories.category_id', '=', 'categories.id')
+                ->select('subcategories.*', 'categories.name as category_name')
+                ->orderBy('created_at', 'DESC')->get();
             return response()->json([
                 'status' => true,
                 'data' => $data,
@@ -32,9 +33,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'slug' => 'required|max:255|unique:categories,slug',
-            'name' => 'required|max:255',
-            'status' => 'required|in:Active,Inactive',
+            'category_id' => 'required|exists:categories,id',
+            'slug'        => 'required|max:255|unique:subcategories,slug',
+            'name'        => 'required|max:255',
+            'status'      => 'required|in:Active,Inactive',
         ]);
 
         if($validator->fails()) {
@@ -42,7 +44,8 @@ class CategoryController extends Controller
         }
 
         try {
-            Category::create([
+            Subcategory::create([
+                'category_id'       => $request->category_id,
                 'meta_title'        => $request->meta_title,
                 'meta_keyword'      => $request->meta_keyword,
                 'meta_description'  => $request->meta_description,
@@ -68,7 +71,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $data = Category::find($id);
+            $data = Subcategory::find($id);
             return response()->json([
                 'status' => true,
                 'data' => $data,
@@ -83,13 +86,13 @@ class CategoryController extends Controller
         }
     }
 
-
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'slug' => 'required|unique:categories,slug,'.$id,
-            'name' => 'required|max:255',
-            'status' => 'required|in:Active,Inactive',
+            'category_id' => 'required|exists:categories,id',
+            'slug'        => 'required|unique:subcategories,slug,'.$id,
+            'name'        => 'required|max:255',
+            'status'      => 'required|in:Active,Inactive',
         ]);
 
         if($validator->fails()) {
@@ -97,7 +100,8 @@ class CategoryController extends Controller
         }
 
         try {
-            Category::find($id)->update([
+            Subcategory::find($id)->update([
+                'category_id'       => $request->category_id,
                 'meta_title'        => $request->meta_title,
                 'meta_keyword'      => $request->meta_keyword,
                 'meta_description'  => $request->meta_description,
@@ -123,7 +127,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            Category::find($id)->delete();
+            Subcategory::find($id)->delete();
             return response()->json([
                 'status' => true,
                 'message' => "Category delete successfully.!"
