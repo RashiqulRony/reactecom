@@ -5,7 +5,9 @@ import CategoryEdit         from "../pages/admin/category/CategoryEdit";
 import Subcategory          from "../pages/admin/subcategory/Subcategory";
 import SubcategoryCreate    from "../pages/admin/subcategory/SubcategoryCreate";
 import SubcategoryEdit      from "../pages/admin/subcategory/SubcategoryEdit";
-import Product              from "../pages/admin/Product";
+import Product              from "../pages/admin/product/Product";
+import ProductCreate        from "../pages/admin/product/ProductCreate";
+import ProductEdit          from "../pages/admin/product/ProductEdit";
 
 const routes = [
     { path: '/admin', exact: true, name: 'Admin' },
@@ -16,7 +18,9 @@ const routes = [
     { path: '/admin/subcategory', exact: true, name: 'Subcategory', component: Subcategory },
     { path: '/admin/subcategory/create', exact: true, name: 'SubcategoryCreate', component: SubcategoryCreate },
     { path: '/admin/subcategory/edit/:id', exact: true, name: 'SubcategoryEdit', component: SubcategoryEdit },
-    { path: '/admin/product', exact: true, name: 'Product', component: Product }
+    { path: '/admin/product', exact: true, name: 'Product', component: Product },
+    { path: '/admin/product/create', exact: true, name: 'ProductCreate', component: ProductCreate },
+    { path: '/admin/product/edit/:id', exact: true, name: 'ProductEdit', component: ProductEdit }
 ];
 
 export default routes;

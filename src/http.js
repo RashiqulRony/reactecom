@@ -5,9 +5,9 @@ if (localStorage.getItem('__AUTH_TOKEN')) {
 }
 
 export default axios.create({
-    baseURL: "http://localhost/ron/reactecom/backend/public/api",
+    baseURL: process.env.REACT_APP_API_URL,
     headers: {
-        "Content-type" : "application/json",
+        "Content-type" : "multipart/form-data",
         "Accept" : "application/json",
     }
 });

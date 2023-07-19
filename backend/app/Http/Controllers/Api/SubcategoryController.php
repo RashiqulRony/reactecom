@@ -14,7 +14,8 @@ class SubcategoryController extends Controller
         try {
             $data = Subcategory::join('categories', 'subcategories.category_id', '=', 'categories.id')
                 ->select('subcategories.*', 'categories.name as category_name')
-                ->orderBy('created_at', 'DESC')->get();
+                ->orderBy('subcategories.created_at', 'DESC')->get();
+
             return response()->json([
                 'status' => true,
                 'data' => $data,

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::apiResource('category', 'CategoryController');
         Route::apiResource('subcategory', 'SubcategoryController');
+        Route::apiResource('product', 'ProductController');
 
         Route::get('auth-check', function () {
             return response()->json([
