@@ -3,7 +3,9 @@ import {Link, useHistory} from "react-router-dom";
 import http from "../../../http";
 import Swal from "sweetalert2";
 import ReactQuill from 'react-quill';
+import EditorToolbar, { modules, formats } from "../../../EditorToolbar";
 import 'react-quill/dist/quill.snow.css';
+
 
 function ProductEdit (props) {
     const history = useHistory();
@@ -199,8 +201,20 @@ function ProductEdit (props) {
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="description" className="form-label">Description</label>
-                                            {/*<textarea name="description" onChange={handelInput} value={productInput.description} className="form-control" id="description"/>*/}
-                                            <ReactQuill theme="snow" value={productDescription} onChange={setDescription} />
+
+                                            <div className="text-editor">
+                                                <EditorToolbar />
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    value={productDescription}
+                                                    onChange={setDescription}
+                                                    placeholder={"Write something awesome..."}
+                                                    modules={modules}
+                                                    formats={formats}
+                                                />
+                                            </div>
+
+
                                             <small className="text-danger">{productInput.errors.description}</small>
                                         </div>
                                         <div className="mb-3">

@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 
+
+Route::get('/get-categories', 'FrontendController@getCategories');
+Route::get('/get-products', 'FrontendController@getProducts');
+
 # Authentication routes...
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('me', 'AuthController@me');

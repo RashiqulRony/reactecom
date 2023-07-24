@@ -58,7 +58,7 @@ class ProductController extends Controller
 
         try {
             if ($request->hasFile('image')) {
-                $file  = $this->imageUpload($request->file('image'), $this->_filePath, '');
+                $file  = $this->imageUpload($request->file('image'), $this->_filePath, '', '', [300, 300]);
                 $image = $file['name'];
             }
 
@@ -140,7 +140,7 @@ class ProductController extends Controller
                     $this->imageAndFileDelete($this->_filePath, $data->image, '');
                 }
 
-                $file  = $this->imageUpload($request->file('image'), $this->_filePath, '');
+                $file  = $this->imageUpload($request->file('image'), $this->_filePath, '', '', [300, 300]);
                 $image = $file['name'];
             }
 

@@ -94,9 +94,21 @@ const Navbar = (key, value) => {
                       <li className="nav-item">
                           <Link className="nav-link" to="/product">Product</Link>
                       </li>
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/collections">Collections</Link>
+                      </li>
 
                   </ul>
                   <div className="d-flex">
+                      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li className="nav-item">
+                              <Link className="nav-link" to="/about">About</Link>
+                          </li>
+                          <li className="nav-item">
+                              <Link className="nav-link" to="/contact-us">Contact Us</Link>
+                          </li>
+                      </ul>
+
                       {authCheck}
                   </div>
 

@@ -4,6 +4,7 @@ import http from "../../../http";
 import Swal from "sweetalert2";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import EditorToolbar, { modules, formats } from "../../../EditorToolbar";
 
 function ProductCreate () {
     const history = useHistory();
@@ -159,8 +160,17 @@ function ProductCreate () {
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="description" className="form-label">Description</label>
-                                            {/*<textarea name="description" onChange={handelInput} value={productInput.description} className="form-control" id="description"/>*/}
-                                            <ReactQuill theme="snow" value={productDescription} onChange={setDescription} />
+                                            <div className="text-editor">
+                                                <EditorToolbar />
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    value={productDescription}
+                                                    onChange={setDescription}
+                                                    placeholder={"Write something awesome..."}
+                                                    modules={modules}
+                                                    formats={formats}
+                                                />
+                                            </div>
                                             <small className="text-danger">{productInput.errors.description}</small>
                                         </div>
                                         <div className="mb-3">
