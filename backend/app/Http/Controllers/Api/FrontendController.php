@@ -47,4 +47,29 @@ class FrontendController extends Controller
             ]);
         }
     }
+
+    public function productDetails($slug)
+    {
+        try {
+            $data = Product::join('categories', 'products.category_id', '=', 'categories.id')
+                ->select('products.*', 'categories.name as category_name')
+                ->where('products.status', 'Active')
+                ->where('products.slug', $slug)->first();
+
+            return response()->json([
+                'status' => true,
+                'data' => $data,
+                'message' => "Date get successfully.!"
+            ]);
+
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
+
+
 }

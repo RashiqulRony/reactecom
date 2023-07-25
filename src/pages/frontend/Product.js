@@ -102,7 +102,7 @@ function Product() {
                                             <p className="card-text m-0"><b>Category: </b> {product.category_name ? product.category_name : 'No Category'}</p>
                                             <p className="card-text"><b>Brand: </b> {product.brand ? product.brand : 'No Brand'} </p>
                                             <Link to="#" className="btn btn-sm btn-success">Add to Cart</Link>
-                                            <Link to="#" className="btn btn-sm btn-info float-end">View Details</Link>
+                                            <Link to={`product/${product.slug}`} className="btn btn-sm btn-info float-end">View Details</Link>
                                         </div>
                                     </div>
                                 </div>

@@ -24,6 +24,7 @@ Route::post('/register', 'AuthController@register');
 
 Route::get('/get-categories', 'FrontendController@getCategories');
 Route::get('/get-products', 'FrontendController@getProducts');
+Route::get('/product/{slug}', 'FrontendController@productDetails');
 
 # Authentication routes...
 Route::group(['middleware' => ['auth:sanctum']], function () {
