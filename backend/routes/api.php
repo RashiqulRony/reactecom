@@ -31,6 +31,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('me', 'AuthController@me');
     Route::post('logout', 'AuthController@logout');
 
+    Route::group(['prefix' => 'cart'], function () {
+        Route::post('add', 'CartController@add');
+    });
+
     # Admin routes...
     Route::group(['middleware' => ['apiAdmin'], 'prefix' => 'admin' ], function () {
 
