@@ -38,6 +38,15 @@ function Product() {
 
     return (
         <div>
+            <nav aria-label="breadcrumb" className="bg-warning py-1">
+                <div className="container">
+                    <ol className="breadcrumb mt-2">
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">Product</li>
+                    </ol>
+                </div>
+            </nav>
+
             <div className="container py-4">
 
                 <div className="row">

@@ -13,7 +13,37 @@ class CartController extends Controller
 
     public function content()
     {
-        $carts = Cart::where('user_id', Auth::id())->get();
+        try {
+            $carts = Cart::where('user_id', Auth::id())->get();
+
+            $data = [];
+            $cartTotal = 0;
+
+            foreach ($carts as $cart) {
+                $cartTotal += $cart->subtotal;
+                $data[] = [
+                    'cart_id' => $cart->id,
+                    'product_id' => $cart->product_id,
+                    'product_name' => $cart->name,
+                    'quantity' => $cart->qty,
+                    'price' => $cart->price,
+                    'subtotal' => $cart->subtotal,
+                    'options' => json_decode($cart->options, true)
+                ];
+            }
+
+            return response()->json([
+                'status' => true,
+                'data' => $data,
+                'cart_total' => $cartTotal,
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+
     }
 
     public function add(Request $request)

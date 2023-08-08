@@ -193,6 +193,21 @@
   .height-50 {
     height: 50px;
   }
+
+  .qty-input {
+    width: 60px;
+    border: 1px solid #ccc;
+    padding-top: 5px;
+    font-weight: bold;
+  }
+  .input-group-text {
+    cursor: pointer;
+  }
 }
 
+/*For All*/
+
+._nowrap {
+  white-space: nowrap;
+}
 

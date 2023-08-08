@@ -23,6 +23,15 @@ function Collections() {
 
     return (
         <div>
+            <nav aria-label="breadcrumb" className="bg-warning py-1">
+                <div className="container">
+                    <ol className="breadcrumb mt-2">
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">Collections</li>
+                    </ol>
+                </div>
+            </nav>
+
             <div className="container mt-5">
                 <div className="row">
                     {categories.map((category, index) => (

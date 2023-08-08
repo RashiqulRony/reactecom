@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', 'AuthController@logout');
 
     Route::group(['prefix' => 'cart'], function () {
+        Route::get('content', 'CartController@content');
         Route::post('add', 'CartController@add');
     });
 
